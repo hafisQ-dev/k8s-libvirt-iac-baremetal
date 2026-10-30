@@ -49,3 +49,4 @@ Statik IP: Şirket bilgi işlem departmanından sunucu için sabit (statik) bir 
 KVM Network Bridge (br0): Şirket ağındaki diğer bilgisayarların, bu sunucu üzerinde kuracağımız sanal makinelere (Kubernetes düğümlerine) doğrudan erişebilmesi için fiziksel Ethernet kartı üzerinde bir Bridge (Köprü) ağı oluşturmanız gerekir. Bu, sanal makinelerin şirketin yerel ağında sanki fiziksel birer bilgisayar gibi IP almasını sağlar.
 
 ***
+Aşama 1 (Terraform & Cloud-Init ile Altyapı):
