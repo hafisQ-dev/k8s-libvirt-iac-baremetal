@@ -5,6 +5,7 @@ Aşama 2 (Ansible ile İşletim Sistemi Yapılandırması): Swap alanlarının k
 Aşama 3 (Kubernetes Bootstrapping): Master düğümde kubeadm init çalıştırılması, join token elde edilerek Worker düğümlerin kümeye dahil edilmesi.
 Aşama 4 (Pod Networking & Cluster Verification): CNI (Calico) eklentisinin uygulanması, düğümlerin ve sistem pod'larının Ready durumunun doğrulanması.
 
+current condition: Step 0 has been completed;
 **Aşama 0 (Sistem & Ortam Hazırlığı)
 0.****
 cat /etc/wsl.conf
