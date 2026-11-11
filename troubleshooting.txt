@@ -3,3 +3,10 @@ CMD üzerinden:
 cd /d "C:\Program Files\Oracle\VirtualBox"
 VBoxManage modifyvm "Sanal_Makine_Adiniz" --nested-hw-virt on
 2. 
+###git troubleshooting###
+*************************
+pkill -f git
+remove file you have had fatal problems(as index.lock)
+git reset
+git status
+*************************
