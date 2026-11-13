@@ -62,10 +62,14 @@ Pulumi > libvirt.Network > Constructor example
 Terraform Registry >> dmacivar/libvirt >> libvirt_network (Resource)
 Libvirt docs >> Network XML format
 #virsh net-edit net_name
-1.3	Storage pool + base image + VM diskleri	Registry: libvirt_pool, libvirt_volume
-    1.3.1 Redhat Docs > Red Hat Enterprise Linux > 13.2. Using Storage Pools
+1.3	Storage pool + base image + VM diskleri	Registry: libvirt_pool, libvirt_volume, locals{}
+1.3.1 Redhat Docs > Red Hat Enterprise Linux > 13.2. Using Storage Pools
 Storage Pool Concept
 A storage pool is a file, directory, or storage device, managed by libvirt to provide storage to virtual machines. Storage pools are divided into storage volumes that store virtual machine images or are attached to virtual machines as additional storage. Multiple guests can share the same storage pool, allowing for better allocation of storage resources.
+1.3.2 Redhat Docs > Red Hat Enterprise Linux > 13.3. Using Storage Volumes
+Storage Volumes Concept
+Storage pools are divided into storage volumes. Storage volumes are abstractions of physical partitions, LVM logical volumes, file-based disk images, and other storage types handled by libvirt. 
+1.3.3 locals.nodes >> Hashicorp Developer > Configuration Language > Use locals to reuse expressions
 
 1.4	SSH anahtarı + cloud-init (kullanıcı, hostname, statik IP)	cloudinit.readthedocs.io + Registry’de cloud-init kaynağı
 1.5	VM’ler (libvirt_domain)	Registry: libvirt_domain
