@@ -66,3 +66,28 @@ resource "libvirt_volume" "ubuntu_base" {
   # capacity is automatically computed from Content-Length when available
 }
 
+locals {
+  nodes = {
+    k8s-master = {
+      role = "master"
+      ip = "10.10.10.11"
+      vcpu = 2
+      ram_mb = 4096
+      disk_gb = 20
+    }
+    k8s-worker-1 = {
+      role = "worker"
+      ip = "10.10.10.12"
+      vcpu = 2
+      ram_mb = 4096
+      disk_gb = 20
+    }
+    k8s-worker-2 = {
+      role = "worker"
+      ip = "10.10.10.12"
+      vcpu = 2
+      ram_mb = 4096
+      disk_gb = 20
+    }
+  }
+}
