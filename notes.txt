@@ -70,7 +70,10 @@ A storage pool is a file, directory, or storage device, managed by libvirt to pr
 Storage Volumes Concept
 Storage pools are divided into storage volumes. Storage volumes are abstractions of physical partitions, LVM logical volumes, file-based disk images, and other storage types handled by libvirt. 
 1.3.3 locals.nodes >> Hashicorp Developer > Configuration Language > Use locals to reuse expressions
-
+Meta-Arguments → for_each >> using of for_each , each.value, each.keys
+> terraform console > keys(local.nodes)
 1.4	SSH anahtarı + cloud-init (kullanıcı, hostname, statik IP)	cloudinit.readthedocs.io + Registry’de cloud-init kaynağı
+cloudinit.readthedocs.io → Explanation (ne işe yarar), How-to ve Reference → “Network config”
+netplan.io → Reference
 1.5	VM’ler (libvirt_domain)	Registry: libvirt_domain
 1.6	Output’lar ve SSH ile doğrulama	Terraform docs: Outputs
