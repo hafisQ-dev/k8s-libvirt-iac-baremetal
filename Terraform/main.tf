@@ -79,15 +79,33 @@ locals {
       role = "worker"
       ip = "10.10.10.12"
       vcpu = 2
-      ram_mb = 4096
+      ram_mb = 2048
       disk_gb = 20
     }
     k8s-worker-2 = {
       role = "worker"
-      ip = "10.10.10.12"
+      ip = "10.10.10.13"
       vcpu = 2
-      ram_mb = 4096
+      ram_mb = 2048
       disk_gb = 20
+    }
+  }
+}
+
+resource "libvirt_volume" "node_disk" {
+  for_each = local.nodes
+  name     = "${each.key}.qcow2"   #k8s-master.qcow2 , k8s-worker-1.qcow2 , k8s-worker-2.qcow2
+  pool     = libvirt_pool.kube_pool.name
+  capacity = each.value.disk_gb * 1024 * 1024 * 1024
+  target = {
+    format = {
+      type = "qcow2"
+    }
+  }
+  backing_store = {
+    path   = libvirt_volume.ubuntu_base.path
+    format = {
+      type = "qcow2"
     }
   }
 }
