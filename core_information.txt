@@ -80,5 +80,5 @@ Control plane	Kubernetes’in beyni (master düğüm)
 ****
 DHCP - ağa bağlanan cihazlara otomatik IP adresi dağıtan hizmettir
 DNS -  isimleri IP adreslerine çeviren sistemdir. google.com yazdığında bilgisayar onun hangi IP’de olduğunu DNS’e sorar.
-
+Cross-platform -  (Türkçe adıyla çapraz platform veya platformlar arası), bir yazılımın, uygulamanın ya da oyunun birden fazla farklı işletim sisteminde veya cihazda (örneğin Windows, macOS, Linux, iOS, Android, Xbox, PlayStation) değişiklik yapmaya gerek kalmadan veya tek bir kod tabanıyla çalışabilmesi anlamına gelir.
 
