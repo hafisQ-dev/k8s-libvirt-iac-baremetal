@@ -75,5 +75,10 @@ Meta-Arguments → for_each >> using of for_each , each.value, each.keys
 1.4	SSH anahtarı + cloud-init (kullanıcı, hostname, statik IP)	cloudinit.readthedocs.io + Registry’de cloud-init kaynağı
 cloudinit.readthedocs.io → Explanation (ne işe yarar), How-to ve Reference → “Network config”
 netplan.io → Reference
+user-data >>> Kullanıcı, SSH anahtarı, paketler, hostname
+meta-data >>> Makine kimliği (instance-id), local-hostname
+networ-config >>> IP, gateway, DNS
+
+---
 1.5	VM’ler (libvirt_domain)	Registry: libvirt_domain
 1.6	Output’lar ve SSH ile doğrulama	Terraform docs: Outputs
