@@ -82,3 +82,6 @@ networ-config >>> IP, gateway, DNS
 ---
 1.5	VM’ler (libvirt_domain)	Registry: libvirt_domain
 1.6	Output’lar ve SSH ile doğrulama	Terraform docs: Outputs
+***SSH-openssh***
+ssh-keygen -t ed25519 -f ~/.ssh/project18 -C "project18C"
+*****************
