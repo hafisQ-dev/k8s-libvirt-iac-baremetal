@@ -109,3 +109,28 @@ resource "libvirt_volume" "node_disk" {
     }
   }
 }
+resource "libvirt_cloudinit_disk" "init" {
+  for_each = local.nodes
+  meta_data      = <<-EOT
+    instance_id: ${each.key}-001
+    localhost-name: ${each.key}
+  EOT
+  user_data      = file("${path.module}/cloud-init/user-data.tftpl")
+  name           = "${each.key}-init.iso"
+  network_config = templatefile(
+    "${path.module}/cloud-init/network-config.tftpl",
+    {ip = each.value.ip}
+  )
+}
+
+resource "libvirt_volume" "cloud-init" {
+  name   = "vm-cloudinit"
+  pool   = "k8spool"
+  format = "raw"
+
+  create = {
+    content = {
+      url = libvirt_cloudinit_disk.init.path
+    }
+  }
+}

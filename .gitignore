@@ -2,6 +2,9 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=terraform,ansible,linux,python
 SHA256SUMS  
 *.img
+*.key
+id_*
+*.pem
 ### Ansible ###
 *.retry
 
