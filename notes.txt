@@ -69,15 +69,18 @@ A storage pool is a file, directory, or storage device, managed by libvirt to pr
 1.3.2 Redhat Docs > Red Hat Enterprise Linux > 13.3. Using Storage Volumes
 Storage Volumes Concept
 Storage pools are divided into storage volumes. Storage volumes are abstractions of physical partitions, LVM logical volumes, file-based disk images, and other storage types handled by libvirt. 
+curl https://cloud-images.ubuntu.com/releases/jammy/release-20261109/ubuntu-22.04-server-cloudimg-amd64.img    #/image
+curl https://cloud-images.ubuntu.com/releases/jammy/release-20261109/SHA256SUMS    #/image
+sudo sha256sum /var/lib/libvirt/storage/images/pool_img/ubuntu-22.04.qcow2    #confirm your .qocw2 image is same or not
 1.3.3 locals.nodes >> Hashicorp Developer > Configuration Language > Use locals to reuse expressions
 Meta-Arguments → for_each >> using of for_each , each.value, each.keys
 > terraform console > keys(local.nodes)
 1.4	SSH anahtarı + cloud-init (kullanıcı, hostname, statik IP)	cloudinit.readthedocs.io + Registry’de cloud-init kaynağı
 cloudinit.readthedocs.io → Explanation (ne işe yarar), How-to ve Reference → “Network config”
 netplan.io → Reference
-user-data >>> Kullanıcı, SSH anahtarı, paketler, hostname
-meta-data >>> Makine kimliği (instance-id), local-hostname
-networ-config >>> IP, gateway, DNS
+user-data >>> Kullanıcı, SSH anahtarı, paketler, hostname   >>> All cloud config examples > Configure instance to be managed by Ansible
+meta-data >>> Makine kimliği (instance-id), local-hostname  >>> Search Results >>NoCloud > Example meta-data
+networ-config >>> IP, gateway, DNS      >>> Reference > Advanced customization > Network configuration > Networking config Version 2
 
 ---
 1.5	VM’ler (libvirt_domain)	Registry: libvirt_domain
