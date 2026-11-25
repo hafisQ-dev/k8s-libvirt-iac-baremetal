@@ -12,7 +12,7 @@ Terraform Provider: Terraform'un belirli bir platformla (AWS, Google Cloud, Libv
 Cloud-Init: Cloud imajlarının (Ubuntu Cloud Image .img) ilk açılışta otomatik yapılandırılmasını sağlayan standart araçtır. Sanal makineye klavye/ekran bağlamadan SSH key'lerini, kullanıcı adını, hostname'i ve statik IP'yi bu mekanizma ile enjekte ederiz.
 Meta-Data: Sanal makinenin kimlik bilgilerini tutar (instance-id, hostname).
 User-Data: Sanal makine açılırken çalışacak olan yapılandırma dosyasıdır (Kullanıcı oluşturma, SSH public key ekleme, paket yükleme).
-ISO Seed Disk: Cloud-Init verilerini (user-data ve meta-data) içeren ve Terraform tarafından dinamik olarak oluşturulup sanal makineye "sanal bir CD-ROM" gibi bağlanan küçük ISO disk imajıdır.
+ISO Seed Disk: Cloud-Init verilerini (user-data ve meta-data) içeren ve Terraform tarafından dinamik olarak oluşturulup sanal makineye "sanal bir CD-ROM" gibi bağlanan küçük ISO disk imajıdır. International Organization for Standardization (ISO)
 
 Mimari ve Kavram Karşılaştırması A-AWS bulut ;B-Bare-Metal:
 Hypervisor (Donanım)
