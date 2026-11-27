@@ -69,24 +69,24 @@ resource "libvirt_volume" "ubuntu_base" {
 locals {
   nodes = {
     k8s-master = {
-      role = "master"
-      ip = "10.10.10.11"
-      vcpu = 2
-      ram_mb = 4096
+      role    = "master"
+      ip      = "10.10.10.11"
+      vcpu    = 2
+      ram_mb  = 4096
       disk_gb = 20
     }
     k8s-worker-1 = {
-      role = "worker"
-      ip = "10.10.10.12"
-      vcpu = 2
-      ram_mb = 2048
+      role    = "worker"
+      ip      = "10.10.10.12"
+      vcpu    = 2
+      ram_mb  = 2048
       disk_gb = 20
     }
     k8s-worker-2 = {
-      role = "worker"
-      ip = "10.10.10.13"
-      vcpu = 2
-      ram_mb = 2048
+      role    = "worker"
+      ip      = "10.10.10.13"
+      vcpu    = 2
+      ram_mb  = 2048
       disk_gb = 20
     }
   }
@@ -94,7 +94,7 @@ locals {
 
 resource "libvirt_volume" "node_disk" {
   for_each = local.nodes
-  name     = "${each.key}.qcow2"   #k8s-master.qcow2 , k8s-worker-1.qcow2 , k8s-worker-2.qcow2
+  name     = "${each.key}.qcow2" #k8s-master.qcow2 , k8s-worker-1.qcow2 , k8s-worker-2.qcow2
   pool     = libvirt_pool.kube_pool.name
   capacity = each.value.disk_gb * 1024 * 1024 * 1024
   target = {
@@ -103,34 +103,87 @@ resource "libvirt_volume" "node_disk" {
     }
   }
   backing_store = {
-    path   = libvirt_volume.ubuntu_base.path
+    path = libvirt_volume.ubuntu_base.path
     format = {
       type = "qcow2"
     }
   }
 }
 resource "libvirt_cloudinit_disk" "init" {
-  for_each = local.nodes
-  meta_data      = <<-EOT
-    instance_id: ${each.key}-001
+  for_each  = local.nodes
+  meta_data = <<-EOT
+    instance-id: ${each.key}-001
     localhost-name: ${each.key}
   EOT
-  user_data      = file("${path.module}/cloud-init/user-data.tftpl")
-  name           = "${each.key}-init.iso"
+  user_data = file("${path.module}/cloud-init/user-data.tftpl")
+  name      = "${each.key}-init.iso"
   network_config = templatefile(
     "${path.module}/cloud-init/network-config.tftpl",
-    {ip = each.value.ip}
+    { ip = each.value.ip }
   )
 }
 
-resource "libvirt_volume" "cloud-init" {
-  name   = "vm-cloudinit"
-  pool   = "k8spool"
-  format = "raw"
+resource "libvirt_volume" "seed" {
+  for_each = local.nodes
+  name     = "${each.key}-seed.iso"
+  pool     = libvirt_pool.kube_pool.name
 
   create = {
     content = {
-      url = libvirt_cloudinit_disk.init.path
+      url = libvirt_cloudinit_disk.init[each.key].path
     }
+  }
+}
+resource "libvirt_domain" "node" {
+  for_each = local.nodes
+
+  name        = each.key
+  type        = "kvm"
+  memory      = each.value.ram_mb
+  memory_unit = "MiB"
+  vcpu        = each.value.vcpu
+  running     = true
+
+  os = {
+    type         = "hvm"
+    type_arch    = "x86_64"
+    type_machine = "q35"
+  }
+
+  devices = {
+    disks = [
+      {
+        source = {
+          volume = {
+            pool   = libvirt_volume.node_disk[each.key].pool
+            volume = libvirt_volume.node_disk[each.key].name
+          }
+        }
+        target = { dev = "vda", bus = "virtio" }
+      },
+      {
+        device = "cdrom"
+        source = {
+          volume = {
+            pool   = libvirt_volume.seed[each.key].pool
+            volume = libvirt_volume.seed[each.key].name
+          }
+        }
+        target = { dev = "sdb", bus = "sata" }
+      }
+    ]
+
+    interfaces = [
+      {
+        model = {
+          type = "virtio"
+        }
+        source = {
+          network = {
+            network = "libvirt_network.kube_network.name"
+          }
+        }
+      }
+    ]
   }
 }
